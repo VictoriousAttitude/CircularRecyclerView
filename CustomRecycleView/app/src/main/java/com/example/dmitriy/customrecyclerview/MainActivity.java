@@ -3,7 +3,10 @@ package com.example.dmitriy.customrecyclerview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 
 import java.util.ArrayList;
 
@@ -11,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rv;
     private ArrayList<Info> data = new ArrayList<>();
-    private TimeAdapter timeAdapter;
+    private Adapter adapter;
+    private SnapHelper snapHelper;
 
     private final static String [] TIME = {"5", "10", "15", "20", "25", "30",
                                            "35", "40", "45", "50", "55" };
@@ -25,13 +29,16 @@ public class MainActivity extends AppCompatActivity {
             data.add(new Info(time));
         }
 
-        timeAdapter = new TimeAdapter(this, data);
+        adapter = new Adapter(this, data);
+        snapHelper = new LinearSnapHelper();
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         rv = (RecyclerView) findViewById(R.id.recycle_view);
-        rv.setAdapter(timeAdapter);
+        rv.setAdapter(adapter);
         rv.setLayoutManager(/*new LinearLayoutManager(this)*/ layoutManager);
+
+        snapHelper.attachToRecyclerView(rv);
     }
 }

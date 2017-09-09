@@ -16,5 +16,4 @@ public class Info {
         return time;
     }
 
-
 }

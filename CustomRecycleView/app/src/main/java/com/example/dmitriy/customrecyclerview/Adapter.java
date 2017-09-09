@@ -13,12 +13,13 @@ import java.util.ArrayList;
  * Created by dmitriy on 29.04.17.
  */
 
-public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ItemsHolder> {
+public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
     private ArrayList<Info> data;
     private Context ctx;
+    private ItemsHolder itemsHolder;
 
-    public TimeAdapter(Context ctx, ArrayList<Info> data) {
+    public Adapter(Context ctx, ArrayList<Info> data) {
         this.data = data;
         this.ctx = ctx;
     }
@@ -31,7 +32,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ItemsHolder> {
 
         View view = inflater.inflate(R.layout.recycler_view_item, parent, false);
 
-        ItemsHolder itemsHolder = new ItemsHolder(view);
+        itemsHolder = new ItemsHolder(view);
 
         return itemsHolder;
     }
@@ -48,6 +49,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ItemsHolder> {
     public int getItemCount() {
         return data.size();
     }
+
 
     class ItemsHolder extends RecyclerView.ViewHolder{
 
