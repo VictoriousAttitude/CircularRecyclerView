@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 
@@ -25,9 +24,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for (String time : TIME) {
+        for (String time : TIME)
             data.add(new Info(time));
-        }
 
         adapter = new Adapter(this, data);
         snapHelper = new LinearSnapHelper();
@@ -35,10 +33,11 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        rv = (RecyclerView) findViewById(R.id.recycle_view);
+        rv = (RecyclerView) findViewById(R.id.recycler_view);
         rv.setAdapter(adapter);
-        rv.setLayoutManager(/*new LinearLayoutManager(this)*/ layoutManager);
+        rv.setLayoutManager(layoutManager);
 
         snapHelper.attachToRecyclerView(rv);
     }
+
 }
