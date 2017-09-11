@@ -47,14 +47,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ItemsHolder holder, int position) {
+    public void onBindViewHolder(final ItemsHolder holder, int position) { // Bug: Works only in one side (to the right)
+        position = position % data.size();
         Info info = data.get(position);
         holder.name.setText(info.getTime());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return Integer.MAX_VALUE;
     }
 
 
