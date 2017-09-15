@@ -2,7 +2,6 @@ package com.example.dmitriy.customrecyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
     private ArrayList<Info> data;
     private Context ctx;
-    private ItemsHolder itemsHolder;
 
     private float deviceWidth;
 
@@ -34,38 +32,39 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycler_view_item, parent, false);
 
-        DisplayMetrics metrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 
         if (windowManager != null)
-              windowManager.getDefaultDisplay().getMetrics(metrics);
+              windowManager.getDefaultDisplay().getMetrics(context.getResources().getDisplayMetrics());
 
-        deviceWidth = metrics.widthPixels;
+        deviceWidth = context.getResources().getDisplayMetrics().widthPixels;
         view.getLayoutParams().width = ((int) deviceWidth) / 5;
 
         return new ItemsHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ItemsHolder holder, int position) { // Bug: Works only in one side (to the right)
-        position = position % data.size();
+    public void onBindViewHolder(final ItemsHolder holder, int position) {
         Info info = data.get(position);
-        holder.name.setText(info.getTime());
+        holder.getName().setText(info.getTime());
     }
 
     @Override
     public int getItemCount() {
-        return Integer.MAX_VALUE;
+        return data.size();
     }
 
 
     class ItemsHolder extends RecyclerView.ViewHolder {
-        public TextView name;
+        private TextView name;
 
         public ItemsHolder(View itemView) {
             super(itemView);
-
             name = (TextView) itemView.findViewById(R.id.time);
+        }
+
+        public TextView getName() {
+            return name;
         }
     }
 }
