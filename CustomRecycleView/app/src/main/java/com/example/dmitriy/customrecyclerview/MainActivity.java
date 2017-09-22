@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.view.View;
 
 import java.util.ArrayList;
 
@@ -41,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
         rv.setLayoutManager(customLayoutManager);
         rv.addOnScrollListener(scrollListener);
-
-      //int position = rv.getChildAdapterPosition(view);
-
+      //rv.addItemDecoration(new SpaceItemDecoration(5));
         snapHelper.attachToRecyclerView(rv);
     }
 

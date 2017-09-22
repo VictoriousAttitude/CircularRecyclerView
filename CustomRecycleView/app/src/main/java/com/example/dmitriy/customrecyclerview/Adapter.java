@@ -47,6 +47,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
     public void onBindViewHolder(final ItemsHolder holder, int position) {
         Info info = data.get(position);
         holder.getName().setText(info.getTime());
+
+
     }
 
     @Override
@@ -60,7 +62,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
         public ItemsHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.time);
+            name = (TextView) itemView.findViewById(R.id.time_text);
         }
 
         public TextView getName() {
