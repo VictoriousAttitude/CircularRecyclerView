@@ -3,9 +3,7 @@ package com.example.dmitriy.customrecyclerview;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -24,6 +22,7 @@ public class ScrollListener extends RecyclerView.OnScrollListener {
         this.customLayoutManager = customLayoutManager;
     }
 
+    // How to find central view in RecyclerView (metrics in pixels)
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
@@ -51,30 +50,45 @@ public class ScrollListener extends RecyclerView.OnScrollListener {
 */
     }
 
+    // TODO: Changing logic of [dx > 0 and dx < 0] when upgrade to circular in both ways RecyclerView
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
         int firstVisible = customLayoutManager.findFirstVisibleItemPosition();
-        int lastVisible = customLayoutManager.findLastVisibleItemPosition();
         int centralVisible = firstVisible + 2; // because only 5 views are visible at the same time
 
         View view = customLayoutManager.findViewByPosition(centralVisible);
+        TextView childTimeTV = (TextView) view.findViewById(R.id.time_text);
 
-        if (view instanceof LinearLayout) {
-
-            TextView childTimeTV = (TextView) view.findViewById(R.id.time_text);
-
-            if (childTimeTV != null) {
-                childTimeTV.setTextSize(60f);
-                childTimeTV.setTextColor(Color.BLUE);
-                childTimeTV.setPadding(5, 5, 0, 0);
-            }
-        }
+        if (childTimeTV != null)
+            setBasicTextCustomization(true, childTimeTV);
 
         if (dx > 0) { // To the right
+            if (firstVisible != 0) {
+                View view1 = customLayoutManager.findViewByPosition(centralVisible - 1);
+                TextView childTimeTV1 = (TextView) view1.findViewById(R.id.time_text);
+                setBasicTextCustomization(false, childTimeTV1);
+            }
         }
         if (dx < 0) { // To the left
+            if (firstVisible != 0) {
+                View view2 = customLayoutManager.findViewByPosition(centralVisible + 1);
+                TextView childTimeTV2 = (TextView) view2.findViewById(R.id.time_text);
+                setBasicTextCustomization(false, childTimeTV2);
+            }
+        }
+    }
+
+    private void setBasicTextCustomization(boolean isTextViewCentral, TextView timeTextView) {
+        if (isTextViewCentral) {
+            timeTextView.setTextSize(60f);
+            timeTextView.setTextColor(Color.BLUE);
+            timeTextView.setPadding(5, 5, 0, 0);
+        } else {
+            timeTextView.setTextSize(35f);
+            timeTextView.setTextColor(Color.BLACK);
+            timeTextView.setPadding(0, 0, 0, 0);
         }
     }
 
