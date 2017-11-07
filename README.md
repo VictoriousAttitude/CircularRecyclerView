@@ -1,6 +1,6 @@
 # Custom RecyclerView
 
-Implementation of horizontal endless effect in RecyclerView: 
+Implementation of horizontal endless circular effect in RecyclerView: 
 - Created my own doubly linked list (for practicing)
 - Customized RecyclerView to get "endless circular effect" in both sides.
 
