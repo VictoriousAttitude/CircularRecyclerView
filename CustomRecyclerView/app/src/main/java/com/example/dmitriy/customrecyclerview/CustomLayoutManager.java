@@ -26,25 +26,4 @@ public class CustomLayoutManager extends LinearLayoutManager {
     public int findFirstVisibleItemPosition() {
         return super.findFirstVisibleItemPosition();
     }
-
-    @Override
-    public int findFirstCompletelyVisibleItemPosition() {
-        return super.findFirstCompletelyVisibleItemPosition();
-    }
-
-    @Override
-    public int findLastVisibleItemPosition() {
-        return super.findLastVisibleItemPosition();
-    }
-
-    @Override
-    public int findLastCompletelyVisibleItemPosition() {
-        return super.findLastCompletelyVisibleItemPosition();
-    }
-
-    @Override
-    public void onScrollStateChanged(int state) {
-        super.onScrollStateChanged(state);
-    }
-
 }

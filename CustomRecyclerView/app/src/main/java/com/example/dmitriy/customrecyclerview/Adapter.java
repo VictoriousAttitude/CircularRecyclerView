@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
 
 /**
  * Created by dmitriy on 29.04.17.
@@ -16,14 +16,10 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
-    private ArrayList<Info> data;
-    private Context ctx;
+    private CircularLinkedList circularLinkedList;
 
-    private float deviceWidth;
-
-    public Adapter(Context ctx, ArrayList<Info> data) {
-        this.data = data;
-        this.ctx = ctx;
+    public Adapter(CircularLinkedList circularLinkedList) {
+        this.circularLinkedList = circularLinkedList;
     }
 
     @Override
@@ -37,7 +33,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
         if (windowManager != null)
               windowManager.getDefaultDisplay().getMetrics(context.getResources().getDisplayMetrics());
 
-        deviceWidth = context.getResources().getDisplayMetrics().widthPixels;
+        float deviceWidth = context.getResources().getDisplayMetrics().widthPixels;
         view.getLayoutParams().width = ((int) deviceWidth) / 5;
 
         return new ItemsHolder(view);
@@ -45,28 +41,25 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
     @Override
     public void onBindViewHolder(final ItemsHolder holder, int position) {
-        Info info = data.get(position);
-        holder.getName().setText(info.getTime());
-
-
+        String timeData = circularLinkedList.get(position % circularLinkedList.getSize());
+        holder.setTime(timeData);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return Integer.MAX_VALUE;
     }
 
-
     class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView name;
+        private TextView tv;
 
         public ItemsHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.time_text);
+            tv = (TextView) itemView.findViewById(R.id.time_text);
         }
 
-        public TextView getName() {
-            return name;
+        public void setTime(String name) {
+           tv.setText(name);
         }
     }
 }

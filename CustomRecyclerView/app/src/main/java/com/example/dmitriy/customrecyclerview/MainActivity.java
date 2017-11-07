@@ -1,41 +1,48 @@
 package com.example.dmitriy.customrecyclerview;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 
-import java.util.ArrayList;
+import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private RecyclerView rv;
-    private ArrayList<Info> data = new ArrayList<>();
     private Adapter adapter;
     private SnapHelper snapHelper;
+    private CustomLayoutManager customLayoutManager;
+    private ScrollListener scrollListener;
 
-    private final static String [] TIME = {"5", "10", "15", "20", "25", "30",
+    private final static String [] TIME = {"05", "10", "15", "20", "25", "30",
                                            "35", "40", "45", "50", "55" };
+
+    private final static CircularLinkedList circularLinkedList = new CircularLinkedList(TIME.length);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adapter = new Adapter(this, data);
-
-        CustomLayoutManager customLayoutManager
-                = new CustomLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        ScrollListener scrollListener = new ScrollListener(this, customLayoutManager);
-
         for (String time : TIME)
-            data.add(new Info(time));
+            circularLinkedList.insert(time);
 
+        setUpCustomization();
+        setUpRV();
+        scrollRecyclerView();
+    }
+
+    private void setUpCustomization() {
+        adapter = new Adapter(circularLinkedList);
         snapHelper = new LinearSnapHelper();
-      //View view = snapHelper.findSnapView(customLayoutManager);
+        customLayoutManager = new CustomLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        scrollListener = new ScrollListener(customLayoutManager);
+    }
 
+    private void setUpRV() {
         rv = (RecyclerView) findViewById(R.id.recycler_view);
         rv.setAdapter(adapter);
         rv.setLayoutManager(customLayoutManager);
@@ -44,4 +51,7 @@ public class MainActivity extends AppCompatActivity {
         snapHelper.attachToRecyclerView(rv);
     }
 
+    private void scrollRecyclerView() {
+        rv.getLayoutManager().scrollToPosition((Integer.MAX_VALUE / 2) - 1);
+    }
 }
