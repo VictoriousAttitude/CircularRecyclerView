@@ -5,4 +5,4 @@ Implementation of endless RecyclerView:
 - Customized RecyclerView to get "endless circular effect" in both sides.
 
 
-https://postimg.org/image/7wt40cj9nv/
+[![Recycler_View.png](https://s1.postimg.org/70wmkw9l7z/Recycler_View.png)](https://postimg.org/image/7wt40cj9nv/)
