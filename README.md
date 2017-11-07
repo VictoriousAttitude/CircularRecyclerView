@@ -5,4 +5,4 @@ Implementation of horizontal endless circular effect in RecyclerView:
 - Customized RecyclerView to get "endless circular effect" in both sides.
 
 
-[![Recycler_View.png](https://s1.postimg.org/70wmkw9l7z/Recycler_View.png)](https://postimg.org/image/7wt40cj9nv/)
+[![Circular_Recycler_View.png](https://s19.postimg.org/9qfuj7d3n/Circular_Recycler_View.png)](https://postimg.org/image/7943bxt73/)
