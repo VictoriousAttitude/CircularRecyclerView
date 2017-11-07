@@ -8,7 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 
 import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
+import com.example.dmitriy.customrecyclerview.rv.Adapter;
+import com.example.dmitriy.customrecyclerview.rv.CustomLayoutManager;
+import com.example.dmitriy.customrecyclerview.rv.ScrollListener;
 
+// TODO: 1. Stop scrolling when it gets to the first or last visible item OR add PAGINATION
+// TODO: 2. Refactoring of ScrollListener (delete updateVisibleOnScreenViews)
 public class MainActivity extends Activity {
 
     private RecyclerView rv;

@@ -1,4 +1,4 @@
-package com.example.dmitriy.customrecyclerview;
+package com.example.dmitriy.customrecyclerview.rv;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

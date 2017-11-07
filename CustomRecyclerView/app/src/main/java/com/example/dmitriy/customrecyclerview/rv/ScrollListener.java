@@ -1,9 +1,11 @@
-package com.example.dmitriy.customrecyclerview;
+package com.example.dmitriy.customrecyclerview.rv;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.dmitriy.customrecyclerview.R;
 
 /**
  * Created by Dima on 9/14/2017.
@@ -61,7 +63,7 @@ public class ScrollListener extends RecyclerView.OnScrollListener {
         updateVisibleOnScreenViews(centralVisiblePosition);
     }
 
-    private void updateVisibleOnScreenViews(int centralPos) { // for preventing bugs when scrolling very fast
+    private void updateVisibleOnScreenViews(int centralPos) { // TODO: delete
         View view;
         int firstPos = customLayoutManager.findFirstCompletelyVisibleItemPosition();
         int lastPos = customLayoutManager.findLastCompletelyVisibleItemPosition();

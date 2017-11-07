@@ -1,4 +1,4 @@
-package com.example.dmitriy.customrecyclerview;
+package com.example.dmitriy.customrecyclerview.rv;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.example.dmitriy.customrecyclerview.R;
 import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
 
 /**

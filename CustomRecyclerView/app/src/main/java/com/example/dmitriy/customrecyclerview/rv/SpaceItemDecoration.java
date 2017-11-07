@@ -1,4 +1,4 @@
-package com.example.dmitriy.customrecyclerview;
+package com.example.dmitriy.customrecyclerview.rv;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
