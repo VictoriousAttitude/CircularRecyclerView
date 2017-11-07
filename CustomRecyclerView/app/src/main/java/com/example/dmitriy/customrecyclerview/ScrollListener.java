@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class ScrollListener extends RecyclerView.OnScrollListener {
 
     private CustomLayoutManager customLayoutManager;
-    private int centralVisible;
+    private int centralVisiblePosition;
 
     public ScrollListener(CustomLayoutManager customLayoutManager) {
         super();
@@ -43,7 +43,6 @@ public class ScrollListener extends RecyclerView.OnScrollListener {
         }
 */
     }
-    // TODO: fix bug with very fast scrolling
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
@@ -58,19 +57,34 @@ public class ScrollListener extends RecyclerView.OnScrollListener {
 
     private void findCentralTextView() {
         int firstVisible = customLayoutManager.findFirstVisibleItemPosition();
-        centralVisible = firstVisible + 2; // because only 5 views are visible at the same time
+        centralVisiblePosition = firstVisible + 2; // because only 5 views are visible at the same time
+        updateVisibleOnScreenViews(centralVisiblePosition);
+    }
+
+    private void updateVisibleOnScreenViews(int centralPos) { // for preventing bugs when scrolling very fast
+        View view;
+        int firstPos = customLayoutManager.findFirstCompletelyVisibleItemPosition();
+        int lastPos = customLayoutManager.findLastCompletelyVisibleItemPosition();
+
+        for (int i = firstPos; i <= lastPos; ++i) {
+            if (i != centralPos) {
+                view = customLayoutManager.findViewByPosition(i);
+                TextView tv = (TextView) view.findViewById(R.id.time_text);
+                customizeTextView(false, tv);
+            }
+        }
     }
 
     private void findTextViewForCustomization(boolean isCentral, int direction) {
-        View view;
+        final View view;
 
         if (isCentral)
-            view = customLayoutManager.findViewByPosition(centralVisible);
+            view = customLayoutManager.findViewByPosition(centralVisiblePosition);
         else {
             if (direction < 0)
-                view = customLayoutManager.findViewByPosition(centralVisible + 1);
+                view = customLayoutManager.findViewByPosition(centralVisiblePosition + 1);
             else
-                view = customLayoutManager.findViewByPosition(centralVisible - 1);
+                view = customLayoutManager.findViewByPosition(centralVisiblePosition - 1);
         }
         TextView tv = (TextView) view.findViewById(R.id.time_text);
         customizeTextView(isCentral, tv);
