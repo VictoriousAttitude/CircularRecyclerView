@@ -3,28 +3,24 @@ package com.example.dmitriy.customrecyclerview;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 
 import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
 import com.example.dmitriy.customrecyclerview.rv.Adapter;
 import com.example.dmitriy.customrecyclerview.rv.CustomLayoutManager;
-import com.example.dmitriy.customrecyclerview.rv.ScrollListener;
+import com.example.dmitriy.customrecyclerview.rv.CustomScrollListener;
+import com.example.dmitriy.customrecyclerview.rv.CustomSnapHelper;
+import com.example.dmitriy.customrecyclerview.rv.MyRecyclerView;
 
-// TODO: 1. Stop scrolling when it gets to the first or last visible item OR add PAGINATION
-// TODO: 2. Refactoring of ScrollListener (delete updateVisibleOnScreenViews)
+
 public class MainActivity extends Activity {
 
-    private RecyclerView rv;
+    private MyRecyclerView rv;
     private Adapter adapter;
-    private SnapHelper snapHelper;
+    private CustomSnapHelper customCustomSnapHelper;
     private CustomLayoutManager customLayoutManager;
-    private ScrollListener scrollListener;
+    private CustomScrollListener customScrollListener;
 
-    private final static String [] TIME = {"05", "10", "15", "20", "25", "30",
-                                           "35", "40", "45", "50", "55", "00" };
-
+    private final static String [] TIME = {"05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "00" };
     private final static CircularLinkedList circularLinkedList = new CircularLinkedList(TIME.length);
 
     @Override
@@ -42,21 +38,21 @@ public class MainActivity extends Activity {
 
     private void setUpCustomization() {
         adapter = new Adapter(circularLinkedList);
-        snapHelper = new LinearSnapHelper();
+        customCustomSnapHelper = new CustomSnapHelper();
         customLayoutManager = new CustomLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        scrollListener = new ScrollListener(customLayoutManager);
+        customScrollListener = new CustomScrollListener(customLayoutManager);
     }
 
     private void setUpRV() {
-        rv = (RecyclerView) findViewById(R.id.recycler_view);
+        rv = findViewById(R.id.recycler_view);
         rv.setAdapter(adapter);
         rv.setLayoutManager(customLayoutManager);
-        rv.addOnScrollListener(scrollListener);
+        rv.addOnScrollListener(customScrollListener);
       //rv.addItemDecoration(new SpaceItemDecoration(5));
-        snapHelper.attachToRecyclerView(rv);
+        customCustomSnapHelper.attachToRecyclerView(rv);
     }
 
     private void scrollRecyclerView() {
-        rv.getLayoutManager().scrollToPosition((Integer.MAX_VALUE / 2) - 1);
+        rv.getLayoutManager().scrollToPosition((Integer.MAX_VALUE / 2) - 6);
     }
 }
