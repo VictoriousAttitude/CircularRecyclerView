@@ -45,17 +45,15 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
 */
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        findCenterTextView(recyclerView, dx);
+        findCenterTextView(dx);
     }
 
-    private void updateVisibleOnScreenViews(RecyclerView rv, int centralPos) {
+    private void updateVisibleOnScreenViews(int centralPos) {
         int firstPos = customLayoutManager.findFirstVisibleItemPosition();
         int lastPos = customLayoutManager.findLastVisibleItemPosition();
 
         for (int i = firstPos; i <= lastPos; ++i) {
             TextView tv = (TextView) customLayoutManager.findViewByPosition(i).findViewById(R.id.time_text);
-
-          //if (rv.findContainingViewHolder(tv).getLayoutPosition() == customLayoutManager.findFirstCompletelyVisibleItemPosition())
             if (i != centralPos)
                 customizeText(tv, false);
             else
@@ -75,12 +73,8 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
         }
     }
 
-    private void findCenterTextView(RecyclerView rv, int direction) {
-        if (direction >= 0)
-            centralVisiblePosition = customLayoutManager.findFirstCompletelyVisibleItemPosition() + 2;
-        if (direction < 0)
-            centralVisiblePosition = customLayoutManager.findLastCompletelyVisibleItemPosition() - 2;
-
-        updateVisibleOnScreenViews(rv, centralVisiblePosition);
+    private void findCenterTextView(int direction) {
+        centralVisiblePosition = customLayoutManager.findFirstCompletelyVisibleItemPosition() + 2;
+        updateVisibleOnScreenViews(centralVisiblePosition);
     }
 }

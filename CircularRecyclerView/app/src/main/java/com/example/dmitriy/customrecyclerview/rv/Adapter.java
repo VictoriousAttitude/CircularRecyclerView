@@ -56,7 +56,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
         public ItemsHolder(View itemView) {
             super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.time_text);
+            tv = itemView.findViewById(R.id.time_text);
         }
 
         public void setTime(String name) {

@@ -1,13 +1,8 @@
 package com.example.dmitriy.customrecyclerview.rv;
 
 import android.content.Context;
-import android.graphics.PointF;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 
 /**
  * Created by Dima on 9/12/2017.

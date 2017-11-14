@@ -42,34 +42,29 @@ public class CustomSnapHelper extends LinearSnapHelper {
     }
 
     private int distanceToStart(View targetView, OrientationHelper helper) {
-        return helper.getDecoratedStart(targetView) - helper.getStartAfterPadding();
+        return helper.getDecoratedStart(targetView);
     }
 
     private View getStartView(RecyclerView.LayoutManager layoutManager, OrientationHelper helper) {
-
         if (layoutManager instanceof LinearLayoutManager) {
 
+            int firstChild = ((LinearLayoutManager) layoutManager).findFirstCompletelyVisibleItemPosition();
             boolean isLastItem = ((LinearLayoutManager) layoutManager).
-                    findLastCompletelyVisibleItemPosition() == layoutManager.getItemCount() - 1;
-            int firstChild = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+                    findLastVisibleItemPosition() == layoutManager.getItemCount() - 1;
 
             if (firstChild == RecyclerView.NO_POSITION || isLastItem)
                 return null;
 
             View child = layoutManager.findViewByPosition(firstChild);
-
-            if (helper.getDecoratedEnd(child) >= helper.getDecoratedMeasurement(child) / 2
-                    && helper.getDecoratedEnd(child) > 0)
+            if (helper.getDecoratedEnd(child) > helper.getDecoratedMeasurement(child) / 2 && helper.getDecoratedEnd(child) > 0)
                 return child;
-
             else {
-                if (((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition() == layoutManager.getItemCount() - 1)
+                if (((LinearLayoutManager) layoutManager).findLastVisibleItemPosition() == layoutManager.getItemCount() - 1)
                     return null;
                 else
                     return layoutManager.findViewByPosition(firstChild + 1);
             }
         }
-
         return super.findSnapView(layoutManager);
     }
 

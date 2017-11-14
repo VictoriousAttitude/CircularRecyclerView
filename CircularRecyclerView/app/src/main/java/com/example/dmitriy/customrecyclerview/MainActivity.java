@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
 
     private MyRecyclerView rv;
     private Adapter adapter;
-    private CustomSnapHelper customCustomSnapHelper;
+    private CustomSnapHelper customSnapHelper;
     private CustomLayoutManager customLayoutManager;
     private CustomScrollListener customScrollListener;
 
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
     private void setUpCustomization() {
         adapter = new Adapter(circularLinkedList);
-        customCustomSnapHelper = new CustomSnapHelper();
+        customSnapHelper = new CustomSnapHelper();
         customLayoutManager = new CustomLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         customScrollListener = new CustomScrollListener(customLayoutManager);
     }
@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
         rv.setLayoutManager(customLayoutManager);
         rv.addOnScrollListener(customScrollListener);
       //rv.addItemDecoration(new SpaceItemDecoration(5));
-        customCustomSnapHelper.attachToRecyclerView(rv);
+        customSnapHelper.attachToRecyclerView(rv);
     }
 
     private void scrollRecyclerView() {

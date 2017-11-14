@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 
 public class MyRecyclerView extends RecyclerView {
 
-    Context context;
+    private Context context;
 
     public MyRecyclerView(Context context) {
         super(context);
