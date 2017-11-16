@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.example.dmitriy.customrecyclerview.R;
 import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by dmitriy on 29.04.17.
  */
@@ -26,8 +29,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
     @Override
     public ItemsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recycler_view_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.recycler_view_item, parent, false);
 
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 
@@ -52,17 +54,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
     }
 
     class ItemsHolder extends RecyclerView.ViewHolder {
-        private TextView tv;
+        @BindView(R.id.time_text) TextView tv;
 
         public ItemsHolder(View itemView) {
             super(itemView);
-            tv = itemView.findViewById(R.id.time_text);
+            ButterKnife.bind(this, itemView);
         }
 
         public void setTime(String name) {
-           tv.setText(name);
+           if (tv != null)
+               tv.setText(name);
         }
     }
-
 
 }

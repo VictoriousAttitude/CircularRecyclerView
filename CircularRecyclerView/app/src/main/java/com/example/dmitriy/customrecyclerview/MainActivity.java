@@ -11,10 +11,16 @@ import com.example.dmitriy.customrecyclerview.rv.CustomScrollListener;
 import com.example.dmitriy.customrecyclerview.rv.CustomSnapHelper;
 import com.example.dmitriy.customrecyclerview.rv.MyRecyclerView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 
 public class MainActivity extends Activity {
 
-    private MyRecyclerView rv;
+    @BindView(R.id.recycler_view) MyRecyclerView rv;
+    private Unbinder unbinder;
+
     private Adapter adapter;
     private CustomSnapHelper customSnapHelper;
     private CustomLayoutManager customLayoutManager;
@@ -27,6 +33,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        unbinder = ButterKnife.bind(this);
 
         for (String time : TIME)
             circularLinkedList.insert(time);
@@ -34,6 +41,12 @@ public class MainActivity extends Activity {
         setUpCustomization();
         setUpRV();
         scrollRecyclerView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     private void setUpCustomization() {
@@ -44,7 +57,6 @@ public class MainActivity extends Activity {
     }
 
     private void setUpRV() {
-        rv = findViewById(R.id.recycler_view);
         rv.setAdapter(adapter);
         rv.setLayoutManager(customLayoutManager);
         rv.addOnScrollListener(customScrollListener);
