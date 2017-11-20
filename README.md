@@ -1,7 +1,7 @@
 # Custom RecyclerView
 
 Implementation of horizontal endless circular effect in RecyclerView: 
-- Created my own doubly linked list (it's an improtant part in the main solution)
+- Created my own doubly linked list (it's an important part in the main solution)
 - Customized RecyclerView to get "endless circular effect" in both sides.
 
 First solution "master" branch - is more preferrable, because I just reuse the same array there (3 times);
