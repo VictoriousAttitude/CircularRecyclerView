@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.dmitriy.customrecyclerview.R;
-import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedListImpl;
 
 /**
  * Created by Dima on 9/14/2017.
@@ -13,14 +12,11 @@ import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedListImpl;
 public class CustomScrollListener extends RecyclerView.OnScrollListener {
 
     private CustomLayoutManager customLayoutManager;
-    private CircularLinkedListImpl circularLinkedListImpl;
-    private int centralVisiblePos, firstVisiblePos, lastVisiblePos;
-    private final static int SCROLLING_STEP = 3;
+    private int centralVisiblePosition;
 
-    public CustomScrollListener(CustomLayoutManager customLayoutManager, CircularLinkedListImpl circularLinkedListImpl) {
+    public CustomScrollListener(CustomLayoutManager customLayoutManager) {
         super();
         this.customLayoutManager = customLayoutManager;
-        this.circularLinkedListImpl = circularLinkedListImpl;
     }
 /*
     @Override
@@ -53,19 +49,11 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
     }
 
     private void updateVisibleOnScreenViews(int centralPos) {
-        firstVisiblePos = customLayoutManager.findFirstVisibleItemPosition();
-        lastVisiblePos = customLayoutManager.findLastVisibleItemPosition();
+        int firstPos = customLayoutManager.findFirstVisibleItemPosition();
+        int lastPos = customLayoutManager.findLastVisibleItemPosition();
 
-        if (firstVisiblePos == circularLinkedListImpl.getFirstArrFirstPos())
-            customLayoutManager.scrollToPosition(circularLinkedListImpl.getThirdArrFirstPos() + SCROLLING_STEP);
-        else {
-            if (lastVisiblePos == circularLinkedListImpl.getThirdArrLastPos())
-                customLayoutManager.scrollToPosition(circularLinkedListImpl.getFirstArrLastPos() - SCROLLING_STEP);
-        }
-
-        for (int i = firstVisiblePos; i <= lastVisiblePos; ++i) {
+        for (int i = firstPos; i <= lastPos; ++i) {
             TextView tv = (TextView) customLayoutManager.findViewByPosition(i).findViewById(R.id.time_text);
-
             if (i != centralPos)
                 customizeText(tv, false);
             else
@@ -85,8 +73,8 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
         }
     }
 
-    private void findCenterTextView(int direction) { // currently don't check horizontal direction
-        centralVisiblePos = customLayoutManager.findFirstCompletelyVisibleItemPosition() + 2;
-        updateVisibleOnScreenViews(centralVisiblePos);
+    private void findCenterTextView(int direction) {
+        centralVisiblePosition = customLayoutManager.findFirstCompletelyVisibleItemPosition() + 2;
+        updateVisibleOnScreenViews(centralVisiblePosition);
     }
 }
