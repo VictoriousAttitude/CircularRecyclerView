@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
+import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedListImpl;
 import com.example.dmitriy.customrecyclerview.rv.Adapter;
 import com.example.dmitriy.customrecyclerview.rv.CustomLayoutManager;
 import com.example.dmitriy.customrecyclerview.rv.CustomScrollListener;
@@ -26,8 +26,8 @@ public class MainActivity extends Activity {
     private CustomLayoutManager customLayoutManager;
     private CustomScrollListener customScrollListener;
 
-    private final static String [] TIME = {"05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "00" };
-    private final static CircularLinkedList circularLinkedList = new CircularLinkedList(TIME.length);
+    private final static String [] TIME = {"05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "00"};
+    private final static CircularLinkedListImpl circularLinkedList = new CircularLinkedListImpl(TIME.length);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
 
-        for (String time : TIME)
-            circularLinkedList.insert(time);
+        circularLinkedList.insertArrays(TIME);
+        circularLinkedList.show();
 
         setUpCustomization();
         setUpRV();
-        scrollRecyclerView();
     }
 
     @Override
@@ -50,21 +49,17 @@ public class MainActivity extends Activity {
     }
 
     private void setUpCustomization() {
-        adapter = new Adapter(circularLinkedList);
         customSnapHelper = new CustomSnapHelper();
         customLayoutManager = new CustomLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        customScrollListener = new CustomScrollListener(customLayoutManager);
+        customScrollListener = new CustomScrollListener(customLayoutManager, circularLinkedList);
     }
 
     private void setUpRV() {
+        adapter = new Adapter(circularLinkedList);
         rv.setAdapter(adapter);
         rv.setLayoutManager(customLayoutManager);
         rv.addOnScrollListener(customScrollListener);
       //rv.addItemDecoration(new SpaceItemDecoration(5));
         customSnapHelper.attachToRecyclerView(rv);
-    }
-
-    private void scrollRecyclerView() {
-        rv.getLayoutManager().scrollToPosition((Integer.MAX_VALUE / 2) - 6);
     }
 }

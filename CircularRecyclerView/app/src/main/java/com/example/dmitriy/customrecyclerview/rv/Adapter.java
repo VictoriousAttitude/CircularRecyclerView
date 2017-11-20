@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.dmitriy.customrecyclerview.R;
-import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
+import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedListImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,10 +20,10 @@ import butterknife.ButterKnife;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
-    private CircularLinkedList circularLinkedList;
+    private CircularLinkedListImpl circularLinkedListImpl;
 
-    public Adapter(CircularLinkedList circularLinkedList) {
-        this.circularLinkedList = circularLinkedList;
+    public Adapter(CircularLinkedListImpl circularLinkedListImpl) {
+        this.circularLinkedListImpl = circularLinkedListImpl;
     }
 
     @Override
@@ -44,13 +44,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
     @Override
     public void onBindViewHolder(final ItemsHolder holder, int position) {
-        String timeData = circularLinkedList.get(position % circularLinkedList.getSize());
-        holder.setTime(timeData);
+        holder.setTime(circularLinkedListImpl.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return Integer.MAX_VALUE;
+        return circularLinkedListImpl.getSize();
     }
 
     class ItemsHolder extends RecyclerView.ViewHolder {
@@ -66,5 +65,4 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
                tv.setText(name);
         }
     }
-
 }
