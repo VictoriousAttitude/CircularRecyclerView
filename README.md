@@ -5,6 +5,7 @@ Implementation of horizontal endless circular effect in RecyclerView:
 - Customized RecyclerView to get "endless circular effect" in both sides.
 
 First solution "master" branch - is more preferrable, because I just reuse the same array there (3 times);
+
 Second solution "second_branch" - is a dirty hack, because of using Integer.MAX_VALUE in the adapter.
 
 If I find new proper ways to make circular endless effects - I will add them here
