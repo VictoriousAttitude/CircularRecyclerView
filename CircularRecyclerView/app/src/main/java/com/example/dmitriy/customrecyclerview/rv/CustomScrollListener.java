@@ -15,7 +15,7 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
     private CustomLayoutManager customLayoutManager;
     private CircularLinkedListImpl circularLinkedListImpl;
     private int centralVisiblePos, firstVisiblePos, lastVisiblePos;
-    private final static int SCROLLING_STEP = 3;
+    private final static int SCROLLING_STEP = 5;
 
     public CustomScrollListener(CustomLayoutManager customLayoutManager, CircularLinkedListImpl circularLinkedListImpl) {
         super();
