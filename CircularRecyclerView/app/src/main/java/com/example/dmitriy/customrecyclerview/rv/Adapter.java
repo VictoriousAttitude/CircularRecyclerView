@@ -36,7 +36,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
         if (windowManager != null)
               windowManager.getDefaultDisplay().getMetrics(context.getResources().getDisplayMetrics());
 
-        float deviceWidth = context.getResources().getDisplayMetrics().widthPixels;
+        float deviceWidth = (float) context.getResources().getDisplayMetrics().widthPixels;
         view.getLayoutParams().width = ((int) deviceWidth) / 5;
 
         return new ItemsHolder(view);
