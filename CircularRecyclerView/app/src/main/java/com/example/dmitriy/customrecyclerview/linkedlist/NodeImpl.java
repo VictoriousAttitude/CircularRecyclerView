@@ -14,12 +14,17 @@ public class NodeImpl implements Node<NodeImpl, String> {
         this.data = data;
     }
 
+    @Override
     public void setPosition(int position) {
         this.position = position;
     }
+
+    @Override
     public int getPosition() {
         return position;
     }
+
+    @Override
     public String getData() {
         return data;
     }

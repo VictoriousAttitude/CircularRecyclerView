@@ -5,5 +5,7 @@ package com.example.dmitriy.customrecyclerview.linkedlist;
  */
 
 public interface Node<N, S> {
-    S getData();
+    public S getData();
+    public void setPosition(int position);
+    public int getPosition();
 }

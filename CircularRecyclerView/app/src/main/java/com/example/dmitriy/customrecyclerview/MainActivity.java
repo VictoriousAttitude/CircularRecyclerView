@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
 import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedListImpl;
+import com.example.dmitriy.customrecyclerview.linkedlist.NodeImpl;
 import com.example.dmitriy.customrecyclerview.rv.Adapter;
 import com.example.dmitriy.customrecyclerview.rv.CustomLayoutManager;
 import com.example.dmitriy.customrecyclerview.rv.CustomScrollListener;
@@ -27,7 +29,7 @@ public class MainActivity extends Activity {
     private CustomScrollListener customScrollListener;
 
     private final static String [] TIME = {"05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "00"};
-    private final static CircularLinkedListImpl circularLinkedList = new CircularLinkedListImpl(TIME.length);
+    private final static CircularLinkedList<String, NodeImpl> circularLinkedList = new CircularLinkedListImpl(TIME.length);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

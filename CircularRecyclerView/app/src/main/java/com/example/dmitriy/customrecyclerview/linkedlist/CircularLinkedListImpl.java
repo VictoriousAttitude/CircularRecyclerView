@@ -6,7 +6,7 @@ import android.util.Log;
  * Created by Dima on 10/20/2017.
  */
 
-public class CircularLinkedListImpl implements CircularLinkedList<NodeImpl> {
+public class CircularLinkedListImpl implements CircularLinkedList<String, NodeImpl> {
     private NodeImpl first;
     private NodeImpl last;
     private NodeImpl firstArrLast;
@@ -25,6 +25,7 @@ public class CircularLinkedListImpl implements CircularLinkedList<NodeImpl> {
         this.maxSize = maxSize;
     }
 
+    @Override
     public void insertArrays(String[] data) {
       //singleArrayData = data;
         while (arraysCount <= 2) {
@@ -75,6 +76,7 @@ public class CircularLinkedListImpl implements CircularLinkedList<NodeImpl> {
             thirdArrFirst = link;
     }
 
+    @Override
     public String get(int position) {
         NodeImpl link = first;
         Log.i("LINK = ", link.getData());
@@ -85,6 +87,7 @@ public class CircularLinkedListImpl implements CircularLinkedList<NodeImpl> {
         return link.getData();
     }
 
+    @Override
     public void show() {
         if (!isEmpty()) {
             NodeImpl link = first;
@@ -97,30 +100,37 @@ public class CircularLinkedListImpl implements CircularLinkedList<NodeImpl> {
         }
     }
 
+    @Override
     public int getFirstArrFirstPos() {
         return first.getPosition();
     }
 
+    @Override
     public int getFirstArrLastPos() {
         return firstArrLast.getPosition();
     }
 
+    @Override
     public int getSecArrFirstPos() {
         return secondArrFirst.getPosition();
     }
 
+    @Override
     public int getSecArrLastPos() {
         return secondArrLast.getPosition();
     }
 
+    @Override
     public int getThirdArrFirstPos() {
         return thirdArrFirst.getPosition();
     }
 
+    @Override
     public int getThirdArrLastPos() {
         return last.getPosition();
     }
 
+    @Override
     public int getSize() {
         return size;
     }

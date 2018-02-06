@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.dmitriy.customrecyclerview.R;
-import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedListImpl;
+import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
 
 /**
  * Created by Dima on 9/14/2017.
@@ -13,14 +13,14 @@ import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedListImpl;
 public class CustomScrollListener extends RecyclerView.OnScrollListener {
 
     private CustomLayoutManager customLayoutManager;
-    private CircularLinkedListImpl circularLinkedListImpl;
+    private CircularLinkedList circularLinkedList;
     private int centralVisiblePos, firstVisiblePos, lastVisiblePos;
     private final static int SCROLLING_STEP = 5;
 
-    public CustomScrollListener(CustomLayoutManager customLayoutManager, CircularLinkedListImpl circularLinkedListImpl) {
+    public CustomScrollListener(CustomLayoutManager customLayoutManager, CircularLinkedList circularLinkedList) {
         super();
         this.customLayoutManager = customLayoutManager;
-        this.circularLinkedListImpl = circularLinkedListImpl;
+        this.circularLinkedList = circularLinkedList;
     }
 /*
     @Override
@@ -56,11 +56,11 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
         firstVisiblePos = customLayoutManager.findFirstVisibleItemPosition();
         lastVisiblePos = customLayoutManager.findLastVisibleItemPosition();
 
-        if (firstVisiblePos == circularLinkedListImpl.getFirstArrFirstPos())
-            customLayoutManager.scrollToPosition(circularLinkedListImpl.getThirdArrFirstPos() + SCROLLING_STEP);
+        if (firstVisiblePos == circularLinkedList.getFirstArrFirstPos())
+            customLayoutManager.scrollToPosition(circularLinkedList.getThirdArrFirstPos() + SCROLLING_STEP);
         else {
-            if (lastVisiblePos == circularLinkedListImpl.getThirdArrLastPos())
-                customLayoutManager.scrollToPosition(circularLinkedListImpl.getFirstArrLastPos() - SCROLLING_STEP);
+            if (lastVisiblePos == circularLinkedList.getThirdArrLastPos())
+                customLayoutManager.scrollToPosition(circularLinkedList.getFirstArrLastPos() - SCROLLING_STEP);
         }
 
         for (int i = firstVisiblePos; i <= lastVisiblePos; ++i) {
