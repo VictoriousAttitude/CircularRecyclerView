@@ -10,4 +10,4 @@ Second solution "second_branch" - is a dirty hack, because of using Integer.MAX_
 
 If I find new proper ways to make circular endless effects - I will add them here
 
-[![Circular_Recycler_View.png](https://s19.postimg.org/9qfuj7d3n/Circular_Recycler_View.png)](https://postimg.org/image/7943bxt73/)
+![circular effect](https://user-images.githubusercontent.com/11979084/38821395-107c2cd6-41a9-11e8-9908-39bfa76d54e8.png)
