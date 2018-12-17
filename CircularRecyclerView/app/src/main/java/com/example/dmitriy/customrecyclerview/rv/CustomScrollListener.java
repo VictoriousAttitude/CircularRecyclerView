@@ -64,7 +64,7 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
         }
 
         for (int i = firstVisiblePos; i <= lastVisiblePos; ++i) {
-            TextView tv = (TextView) customLayoutManager.findViewByPosition(i).findViewById(R.id.time_text);
+            TextView tv = customLayoutManager.findViewByPosition(i).findViewById(R.id.time_text);
 
             if (i != centralPos)
                 customizeText(tv, false);
