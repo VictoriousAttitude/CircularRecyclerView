@@ -50,3 +50,9 @@ gradlew
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 app/src/test/java/com/example/dmitriy/customrecyclerview/ExampleUnitTest.java
+app/.gitignore
+app/.idea/gradle.xml
+app/.idea/
+app/gradle/wrapper/gradle-wrapper.jar
+app/gradle/wrapper/gradle-wrapper.properties
+app/src/androidTest/java/com/example/dmitriy/customrecyclerview/ExampleInstrumentedTest.java
