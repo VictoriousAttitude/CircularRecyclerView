@@ -49,3 +49,4 @@ gradlew
 *.bat
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
+app/src/test/java/com/example/dmitriy/customrecyclerview/ExampleUnitTest.java
