@@ -15,8 +15,7 @@ public class CustomSnapHelper extends LinearSnapHelper {
 
     private OrientationHelper verticalHelper, horizontalHelper;
 
-    public CustomSnapHelper() {
-    }
+    public CustomSnapHelper() { }
 
     @Override
     public int[] calculateDistanceToFinalSnap(@NonNull RecyclerView.LayoutManager layoutManager, @NonNull View targetView) {

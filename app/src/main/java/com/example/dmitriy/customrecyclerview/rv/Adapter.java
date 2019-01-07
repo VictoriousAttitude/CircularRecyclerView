@@ -28,18 +28,22 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
     @Override
     public ItemsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = setUpNumberOfElemsOnScreen(parent);
+        return new ItemsHolder(view);
+    }
+
+    private View setUpNumberOfElemsOnScreen(ViewGroup parent) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.recycler_view_item, parent, false);
-
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 
         if (windowManager != null)
-              windowManager.getDefaultDisplay().getMetrics(context.getResources().getDisplayMetrics());
+            windowManager.getDefaultDisplay().getMetrics(context.getResources().getDisplayMetrics());
 
         float deviceWidth = (float) context.getResources().getDisplayMetrics().widthPixels;
         view.getLayoutParams().width = ((int) deviceWidth) / 5;
 
-        return new ItemsHolder(view);
+        return view;
     }
 
     @Override

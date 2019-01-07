@@ -11,13 +11,13 @@ import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
  */
 
 public class CustomScrollListener extends RecyclerView.OnScrollListener {
-
     private final CustomLayoutManager customLayoutManager;
     private final CircularLinkedList circularLinkedList;
     private int centralVisiblePos = 0;
     private int firstVisiblePos = 0;
     private int lastVisiblePos = 0;
-    private final static int SCROLLING_STEP = 5;
+    private final static int SCROLLING_STEP = 3;
+
 
     public CustomScrollListener(CustomLayoutManager customLayoutManager, CircularLinkedList circularLinkedList) {
         super();
@@ -51,44 +51,46 @@ public class CustomScrollListener extends RecyclerView.OnScrollListener {
 */
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        findCenterTextView();
+        setUpPosOfElems();
+        scrollItems();
+        highlightElems();
     }
 
-    private void updateVisibleOnScreenViews(int centralPos) {
-        firstVisiblePos = customLayoutManager.findFirstVisibleItemPosition();
-        lastVisiblePos = customLayoutManager.findLastVisibleItemPosition();
+    private void highlightElems() {
+        for (int i = firstVisiblePos; i <= lastVisiblePos; ++i) {
+            TextView textView = customLayoutManager.findViewByPosition(i).findViewById(R.id.time_text);
 
+            if (i != centralVisiblePos)
+                customizeItemsStyle(textView, false);
+            else
+                customizeItemsStyle(textView, true);
+        }
+    }
+
+    private void scrollItems() {
         if (firstVisiblePos == circularLinkedList.getFirstArrFirstPos())
             customLayoutManager.scrollToPosition(circularLinkedList.getThirdArrFirstPos() + SCROLLING_STEP);
         else {
             if (lastVisiblePos == circularLinkedList.getThirdArrLastPos())
                 customLayoutManager.scrollToPosition(circularLinkedList.getFirstArrLastPos() - SCROLLING_STEP);
         }
-
-        for (int i = firstVisiblePos; i <= lastVisiblePos; ++i) {
-            TextView tv = customLayoutManager.findViewByPosition(i).findViewById(R.id.time_text);
-
-            if (i != centralPos)
-                customizeText(tv, false);
-            else
-                customizeText(tv, true);
-        }
     }
 
-    private void customizeText(TextView tv, boolean isCenter) {
+    private void customizeItemsStyle(TextView textView, boolean isCenter) {
         if (isCenter) {
-            tv.setTextSize(60f);
-            tv.setTextColor(tv.getContext().getResources().getColor(R.color.colorBlue));
-            tv.setPadding(5, 5, 0, 0);
+            textView.setTextSize(60f);
+            textView.setTextColor(textView.getContext().getResources().getColor(R.color.colorBlue));
+            textView.setPadding(5, 5, 0, 0);
         } else {
-            tv.setTextSize(35f);
-            tv.setTextColor(tv.getContext().getResources().getColor(R.color.colorBlack));
-            tv.setPadding(0, 0, 0, 0);
+            textView.setTextSize(35f);
+            textView.setTextColor(textView.getContext().getResources().getColor(R.color.colorBlack));
+            textView.setPadding(0, 0, 0, 0);
         }
     }
 
-    private void findCenterTextView() {
+    private void setUpPosOfElems() {
+        firstVisiblePos = customLayoutManager.findFirstVisibleItemPosition();
+        lastVisiblePos = customLayoutManager.findLastVisibleItemPosition();
         centralVisiblePos = customLayoutManager.findFirstCompletelyVisibleItemPosition() + 2;
-        updateVisibleOnScreenViews(centralVisiblePos);
     }
 }

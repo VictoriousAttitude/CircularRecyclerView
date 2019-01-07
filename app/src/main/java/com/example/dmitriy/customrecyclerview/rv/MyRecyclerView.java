@@ -10,11 +10,8 @@ import android.util.AttributeSet;
 
 public class MyRecyclerView extends RecyclerView {
 
-    private Context context;
-
     public MyRecyclerView(Context context) {
         super(context);
-        this.context = context;
     }
 
     public MyRecyclerView(Context context, AttributeSet attrs) {
