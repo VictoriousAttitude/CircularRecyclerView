@@ -26,6 +26,8 @@ public class CircularLinkedListImpl implements CircularLinkedList<String> {
 
     @Override
     public void insertArrays(String[] data) {
+        if (arraysCount > 0)
+            arraysCount = 0;
         while (arraysCount <= 2) {
             for (String str : data) {
                 insert(str);
@@ -92,7 +94,7 @@ public class CircularLinkedListImpl implements CircularLinkedList<String> {
             Node link = first;
             do {
                 Log.i("data = ", String.valueOf(link.getData()));
-                Log.i("position = ", String.valueOf(link.getPosition() + "\n"));
+                Log.i("position = ", link.getPosition() + "\n");
 
                 link = link.getNext();
             } while (link != last.getNext());

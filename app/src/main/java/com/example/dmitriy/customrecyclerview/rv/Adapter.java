@@ -1,7 +1,9 @@
 package com.example.dmitriy.customrecyclerview.rv;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +28,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
         this.circularLinkedList = circularLinkedList;
     }
 
+    @NonNull
     @Override
-    public ItemsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ItemsHolder onCreaeViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = setUpNumberOfElemsOnScreen(parent);
         return new ItemsHolder(view);
     }
@@ -47,7 +50,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ItemsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ItemsHolder holder, int position) {
         holder.setTime(String.valueOf(circularLinkedList.get(position)));
     }
 
@@ -59,12 +62,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
     class ItemsHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.time_text) TextView tv;
 
-        public ItemsHolder(View itemView) {
+        private ItemsHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void setTime(String name) {
+        private void setTime(String name) {
            if (tv != null)
                tv.setText(name);
         }

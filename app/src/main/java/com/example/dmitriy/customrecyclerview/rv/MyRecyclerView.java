@@ -1,7 +1,7 @@
 package com.example.dmitriy.customrecyclerview.rv;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 
 /**
@@ -25,7 +25,6 @@ public class MyRecyclerView extends RecyclerView {
     @Override
     public boolean fling(int velocityX, int velocityY) {
         velocityX *= 0.1;
-      //velocityY *= 0.1;
         return super.fling(velocityX, velocityY);
     }
 

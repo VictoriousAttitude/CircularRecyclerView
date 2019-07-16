@@ -2,7 +2,7 @@ package com.example.dmitriy.customrecyclerview;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedList;
 import com.example.dmitriy.customrecyclerview.linkedlist.CircularLinkedListImpl;
@@ -14,14 +14,12 @@ import com.example.dmitriy.customrecyclerview.rv.MyRecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 public class MainActivity extends Activity {
 
     @BindView(R.id.recycler_view) MyRecyclerView recyclerView;
 
-    private Unbinder unbinder;
     private CustomSnapHelper customSnapHelper;
     private CustomLayoutManager customLayoutManager;
     private CustomScrollListener customScrollListener;
@@ -37,16 +35,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        unbinder = ButterKnife.bind(this);
-
-        setUpCustomParams();
-        setUpRecyclerViewParams();
+        ButterKnife.bind(this);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
+    protected void onResume() {
+        super.onResume();
+        setUpCustomParams();
+        setUpRecyclerViewParams();
     }
 
     private void setUpCustomParams() {
