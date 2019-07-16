@@ -30,7 +30,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ItemsHolder> {
 
     @NonNull
     @Override
-    public ItemsHolder onCreaeViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = setUpNumberOfElemsOnScreen(parent);
         return new ItemsHolder(view);
     }
