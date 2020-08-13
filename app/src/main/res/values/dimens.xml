@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="sp35">35sp</dimen>
-    <dimen name="dp10">10dip</dimen>
+    <dimen name="textSize">35sp</dimen>
+    <dimen name="paddingRV">10dip</dimen>
 
 </resources>
